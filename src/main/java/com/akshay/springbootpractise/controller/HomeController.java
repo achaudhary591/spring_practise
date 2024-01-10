@@ -47,21 +47,17 @@ public class HomeController {
         return "Your name is : " + name;
     }*/
 
-    @GetMapping("/path-variable/{id}")
-    public User getUserById(@PathVariable String id) {
-        // Search for the user by ID in the list of sample users
+    @GetMapping("/path-variable/{id1}/{id2}")
+    public List<User> getUserById(@PathVariable String id1 , @PathVariable String id2) {
+
+        List<User> userArray = new ArrayList<User>();
+
         for (User user : users) {
-            if (user.getId() == Integer.parseInt(id)) {
-                return user;
+            if (user.getId() == Integer.parseInt(id1 )|| user.getId() == Integer.parseInt(id2)) {
+                userArray.add(user);
             }
         }
-        User user;
-        user = new User();
-        user.setId(random.nextInt());
-        user.setName("Akshay Chaudhary");
-        user.setEmail("user@akshay.com");
-
-        return user;// User not found
+        return userArray;
     }
 
     @GetMapping("/request-param")
